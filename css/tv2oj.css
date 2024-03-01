@@ -1,0 +1,428 @@
+/*
+Table of contents:
+ - Typography
+ - Spacing
+ - Colors
+ - Base styles: defaults
+ - Navigation
+*/
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+@font-face {
+  font-family: "sundry-medium";
+  src: url("/assets/fonts/Sundry-Medium.woff2") format("woff2"),
+    url("/assets/fonts/Sundry-Medium.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "sundry-regular";
+  src: url("/assets/fonts/Sundry-Regular.woff2") format("woff2"),
+    url("/assets/fonts/Sundry-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --proxima-nova: "proxima-nova", sans-serif;
+  --sundry-regular: "sundry-regular", sans-serif;
+  --sundry-medium: "sundry-medium", sans-serif;
+
+  --oj-font-body: var(--sundry-regular);
+  --oj-font-heading: var(--sundry-medium);
+
+  --oj-font-scale-ratio: 1.2; //Minor 3rd
+
+  --oj-font-xs: 0.75rem; //12px
+  --oj-font-sm: 0.875rem; //14px
+  --oj-font-md: 1rem; //16px
+  --oj-font-lg: 1.25rem; //20px;
+  --oj-font-xl: calc(var(--oj-font-md) * var(--oj-font-scale-ratio));
+  --oj-font-2xl: calc(var(--oj-font-xl) * var(--oj-font-scale-ratio));
+  --oj-font-3xl: calc(var(--oj-font-2xl) * var(--oj-font-scale-ratio));
+  --oj-font-4xl: calc(var(--oj-font-3xl) * var(--oj-font-scale-ratio));
+}
+
+@media only screen and (min-width: 1200px) {
+  :root {
+    --oj-font-scale-ratio: 1.333; //Perfect 4th
+    --oj-font-lg: calc(var(--oj-font-md) * var(--oj-font-scale-ratio));
+  }
+}
+
+/* ==========================================================================
+   Spacing: Positive & Negative
+   ========================================================================== */
+:root {
+  //Spacing
+  --oj-space-xs: calc(var(--oj-space-md) / 4);
+  --oj-space-sm: calc(var(--oj-space-md) / 2);
+  --oj-space-md: 16px;
+  --oj-space-lg: calc(var(--oj-space-md) * 2);
+  --oj-space-xl: calc(var(--oj-space-md) * 4);
+}
+
+@media only screen and (min-width: 768px) {
+  :root {
+    --oj-space-md: 1rem;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  :root {
+    --oj-space-md: 1.25rem;
+  }
+}
+
+/* ==========================================================================
+   Colors
+   ========================================================================== */
+:root {
+  /* Primary colors */
+  --oj-white: #ffffff;
+  --oj-gray-50: #f7f7f3; //not identity
+  --oj-gray-100: #edede5;
+  --oj-gray-200: #dbdacc;
+  --oj-gray-300: #afaca5;
+  --oj-gray-400: #8e8881;
+  --oj-gray-500: #746f69;
+  --oj-black-400: #333333; //not identity
+  --oj-black-500: #242424;
+  --oj-black-700: #141414;
+  --oj-black-900: #000000;
+  --oj-yellow-400: #e1ff7d;
+  --oj-yellow-500: #ffed00;
+  --oj-green-500: #00aa5a;
+  --oj-green-600: #00914e;
+  --oj-green-900: #235537;
+  --oj-pink-500: #ffc8c8;
+  --oj-red-500: #ff3200;
+
+  /* UI variables */
+  --oj-bg-color: var(--oj-gray-100);
+  --oj-text-color: var(--oj-black-700);
+  --oj-accent-color: var(--oj-green-500);
+  --oj-backdrop-color: rgba(0, 0, 0, 0.5);
+  --oj-border-color: var(--oj-gray-200);
+}
+
+/* ==========================================================================
+   Base styles: defaults
+   ========================================================================== */
+:root {
+  font-size: var(--oj-font-md);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--oj-bg-color, #edede5);
+  color: var(--oj-text-color, #141414);
+  line-break: strict;
+  margin: 0;
+  max-width: 100%;
+  min-width: 320px;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: var(--oj-font-body);
+  font-weight: normal;
+  font-size: var(--oj-font-md);
+  font-style: normal;
+  letter-spacing: 0;
+  line-height: 145%;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: var(--oj-black-500, #242424);
+    color: var(--oj-gray-50, #f7f7f3);
+  }
+}
+
+::-moz-selection,
+::selection {
+  background: var(--oj-color-black);
+  color: var(--oj-color-white);
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid var(--oj-border-color);
+  margin: -1px 0;
+  padding: 0;
+}
+
+// Remove the gap between audio, canvas, iframes,
+// images, videos and the bottom of their containers
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+  vertical-align: middle;
+}
+
+// Remove default fieldset styles.
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+// Allow only vertical resizing of textareas.
+textarea {
+  resize: vertical;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+}
+
+svg {
+  pointer-events: none;
+}
+
+h1 {
+  font-family: var(--oj-font-heading);
+  font-weight: normal;
+  font-size: var(--oj-font-3xl);
+  letter-spacing: -1%;
+  line-height: 112.5%;
+}
+
+h2 {
+  font-family: var(--oj-font-heading);
+  font-weight: normal;
+  font-size: var(--oj-font-2xl);
+  letter-spacing: -1%;
+  line-height: 112.5%;
+}
+
+h3 {
+  font-family: var(--oj-font-heading);
+  font-weight: 500;
+  font-size: var(--oj-font-xl);
+  letter-spacing: -1%;
+  line-height: 125%;
+}
+
+/* ==========================================================================
+   Navigation
+   ========================================================================== */
+.top-navigation {
+  background-color: white;
+  color: #141414;
+}
+
+@media (prefers-color-scheme: dark) {
+  .top-navigation {
+    background-color: var(--oj-black-500, #242424);
+    color: var(--oj-gray-50, #f7f7f3);
+  }
+}
+
+.nav-link.active {
+  color: var(--oj-green-600);
+}
+
+.logo {
+  font-family: var(--sundry-medium);
+}
+
+/* ==========================================================================
+   Carousel
+   ========================================================================== */
+.carousel {
+  overflow: hidden;
+  position: relative;
+  height: 240px;
+}
+
+.carousel__slide {
+  position: absolute;
+  top: 0;
+  left: 100%; /* Start off-screen */
+  width: 100%;
+  opacity: 0;
+  transition: left 0.25s ease; /* Smooth transition for the left property */
+  height: 220px;
+}
+
+.carousel__slide.active {
+  left: 0; /* Slide into view */
+  opacity: 1;
+}
+
+.carousel__thumbnails {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.thumbnail {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid var(--oj-gray-200);
+  margin: 0;
+  cursor: pointer;
+}
+
+.dark-green {
+  background-color: var(--oj-green-900, #235537);
+}
+
+.green {
+  background-color: var(--oj-green-500, #00aa5a);
+}
+
+.lime {
+  background-color: var(--oj-yellow-400, #e1ff7d);
+}
+
+.pink {
+  background-color: var(--oj-pink-500, #ffc8c8);
+}
+
+.red {
+  background-color: var(--oj-red-500, #ff3200);
+}
+
+.black {
+  background-color: var(--oj-black-900, #000000);
+}
+
+.white {
+  background-color: var(--oj-white, #ffffff);
+}
+
+/* ==========================================================================
+   Design Guide Carousel
+   ========================================================================== */
+#designguide-carousel {
+  opacity: 0;
+  pointer-events: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(2px);
+  color: var(--oj-green-500);
+  display: flex;
+  justify-content: flex-end;
+  align-items: top;
+}
+
+#designguide-carousel.fullscreen-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#close-designguide {
+  position: absolute;
+  right: 16px; 
+  top: 16px;
+  width: 64px;
+  height: 64px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  transition: all 150ms;
+  font-size: 32px;
+}
+
+#close-designguide:hover {
+  color: var(--oj-green-600);
+}
+
+.glide__arrows {
+  position: fixed;
+  padding: 16px;
+  right: 0;
+  bottom: 0;
+  color: var(--oj-green-500);
+  gap: 16px;
+  display: flex; 
+  width: 100%;
+  justify-content: space-between;
+}
+
+.glide__arrow {
+  width: 64px;
+  height: 64px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  transition: all 150ms;
+  font-size: 40px;
+}
+
+.glide__arrow:hover {
+  color: var(--oj-green-600);
+}
+
+@media screen and (min-width: 1024px) {
+  .glide__arrows {
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+  }
+
+  .glide__arrow {
+    height: 50vh;
+  }
+}
+
+/* Icons */
+.icon {
+  display: inline-block;
+}
+.icon svg {
+  fill: currentColor;
+}
+
+.icon-sm {
+  height: 24px;
+  width: 24px;
+}
+
+.icon-md {
+  height: 32px;
+  width: 32px;
+}
+
+.icon-lg {
+  height: 48px;
+  width: 48px;
+}
